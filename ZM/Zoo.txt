@@ -1,0 +1,10 @@
+create database zoo;
+use zoo;
+
+create table Zoo(zooId int auto_increment primary key,zooName varchar(100),location varchar(50),phoneNo varchar(10) unique,entryFee double,openTime time,closeTime time,status enum('OPEN','CLOSED'),unique(zooName,location));
+
+
+create table Animal(animalId int auto_increment primary key,animalName varchar(100),diet enum('CARNIVORE','HERBIVORE','OMNIVORE'),danger enum('Y','N'),special enum('Y','N'),zooId int,foreign key(zooId) references Zoo(zooId));
+
+
+create table Program(programId int auto_increment primary key,programName varchar(100),animalId int,zooId int,date date,showtime time,seatsAvailable int,season enum('WINTER','SUMMER','RAINY'),unique(programName,animalId,zooId),foreign key(animalId) references Animal(animalId),foreign key(zooId) references Zoo(zooId));
